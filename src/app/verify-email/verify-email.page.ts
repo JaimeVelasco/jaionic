@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../shared/authentication-service';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss'],
+  selector: 'app-verify-email',
+  templateUrl: './verify-email.page.html',
+  styleUrls: ['./verify-email.page.scss'],
 })
-export class TabsPage implements OnInit {
+export class VerifyEmailPage implements OnInit {
   constructor(public authService: AuthenticationService) {}
-  ngOnInit() {
-    console.log(this.authService.isLoggedIn);
-  }
+
+  ngOnInit() {}
 }
