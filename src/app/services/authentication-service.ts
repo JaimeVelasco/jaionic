@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { auth } from 'firebase/app';
-import { User } from './user';
+import { User } from '../models/user.interface';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
@@ -68,13 +68,13 @@ export class AuthenticationService {
   // Returns true when user is looged in
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null && user.emailVerified !== false ? true : false;
+    return user && user.emailVerified;
   }
 
   // Returns true when user's email is verified
   get isEmailVerified(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return user.emailVerified !== false ? true : false;
+    return user && user.emailVerified;
   }
 
   // Sign in with Gmail
@@ -88,7 +88,7 @@ export class AuthenticationService {
       .signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['']);
         });
         this.SetUserData(result.user);
       })
