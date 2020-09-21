@@ -1,0 +1,13 @@
+{
+  "appId": "io.jaionic.app",
+  "appName": "jaionic",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 5000
+    }
+  },
+  "cordova": {}
+}
