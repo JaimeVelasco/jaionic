@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotoService } from '../services/photo.service';
 import { FirestoreService } from '../services/data/firestore.service';
-import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { Observable, of, Subscription } from 'rxjs';
+import { finalize, map, tap } from 'rxjs/operators';
 import { GoogleVisionService } from '../services/google-vision.service';
+import { promise } from 'protractor';
 
 @Component({
   selector: 'app-tab1',
@@ -13,6 +14,8 @@ import { GoogleVisionService } from '../services/google-vision.service';
 export class Tab1Page implements OnInit {
   userList: {};
   userList2: {};
+  downloadURL: Observable<string>;
+  uploadPercent: Observable<number>;
 
   constructor(
     public photoService: PhotoService,
@@ -29,7 +32,6 @@ export class Tab1Page implements OnInit {
           images: e.payload.doc.data()['images'],
         };
       });
-      console.log(data);
     });
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -41,12 +43,15 @@ export class Tab1Page implements OnInit {
   takePicture() {
     const user = JSON.parse(localStorage.getItem('user'));
     this.photoService.takePicture().then((pic) => {
-      this.fire.saveImage(pic, user.uid);
-      this.gVision
-        .googleVisionAPI(pic, 'OBJECT_LOCALIZATION')
-        .subscribe((res) => {
-          console.log(res);
-        });
+      this.fire.saveImage(pic, user.uid).then((data) => {
+        this.downloadURL = data;
+      });
+
+      // this.gVision
+      //   .googleVisionAPI(pic, 'OBJECT_LOCALIZATION')
+      //   .subscribe((res) => {
+      //     console.log(res);
+      //   });
     });
   }
 }
