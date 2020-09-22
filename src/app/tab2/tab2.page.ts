@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
 import { startWith, tap } from 'rxjs/operators';
 import { trace } from '@angular/fire/performance';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-tab2',
@@ -24,7 +25,11 @@ export class Tab2Page implements OnInit {
 
   items: Observable<any[]>;
 
-  constructor(state: TransferState, database: AngularFireDatabase) {
+  constructor(
+    state: TransferState,
+    database: AngularFireDatabase,
+    public photoService: PhotoService
+  ) {
     // this.items = database.list('users').valueChanges();
     const doc = database.object('users');
     const key = makeStateKey(doc.query.toString());

@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth-guard.guard';
 import { HttpClientModule } from '@angular/common/http';
+// import { ImageModalPage } from './image-modal/image-modal.page';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFirestoreModule,
     AngularFireStorageModule,
     HttpClientModule,
+    // ImageModalPage,
   ],
   providers: [
     StatusBar,

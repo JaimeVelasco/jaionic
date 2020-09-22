@@ -1,17 +1,10 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { firestore } from 'firebase/app';
 import { base64StringToBlob } from 'blob-util';
-import { promise } from 'protractor';
-import { Data } from '../../models/data.interface';
 import { Observable } from 'rxjs';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { finalize, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',

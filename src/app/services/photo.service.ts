@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Plugins, CameraResultType } from '@capacitor/core';
+import {
+  Plugins,
+  CameraResultType,
+  Capacitor,
+  FilesystemDirectory,
+  CameraPhoto,
+  CameraSource,
+} from '@capacitor/core';
 
-const { Camera } = Plugins;
+const { Camera, Filesystem, Storage } = Plugins;
 
 @Injectable({
   providedIn: 'root',
 })
 export class PhotoService {
+  public photos: Photo[] = [];
+
   constructor() {}
 
   selectedPicture: string;
@@ -23,9 +32,22 @@ export class PhotoService {
         preserveAspectRatio: false,
       });
       this.selectedPicture = capturedPhoto.base64String;
+
+      this.photos.unshift({
+        filepath: 'soon...',
+        webviewPath: capturedPhoto.webPath,
+      });
+
       return this.selectedPicture;
     } catch (error) {
       console.error(error);
     }
   }
+
+  private async savePicture(cameraPhoto: CameraPhoto) {}
+}
+
+export interface Photo {
+  filepath: string;
+  webviewPath: string;
 }

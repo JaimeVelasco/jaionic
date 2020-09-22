@@ -35,6 +35,10 @@ const routes: Routes = [
       import('./dashboard/dashboard.module').then((m) => m.DashboardPageModule),
     canActivate: [AuthGuard],
   },
+  // {
+  //   path: 'image-modal',
+  //   loadChildren: () => import('./image-modal/image-modal.module').then( m => m.ImageModalPageModule)
+  // },
 ];
 @NgModule({
   imports: [
